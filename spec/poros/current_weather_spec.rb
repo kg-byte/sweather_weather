@@ -37,7 +37,7 @@ RSpec.describe CurrentWeather do
     expect(current_weather.humidity).to eq(13)
     expect(current_weather.visibility).to eq(10000)
     expect(current_weather.uvi).to eq(3.42)
-    expect(current_weather.conditions).to eq('broken clouds')
+    expect(current_weather.icon).to eq('04d')
   end
 
 
