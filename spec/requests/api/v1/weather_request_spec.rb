@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "Weather API", :vcr do 
 
   it 'sends serialized current, daily and hourly weather forecast' do 
-
+    data = JSON.parse(File.read('spec/fixtures/openweather_response.json'), symbolize_names: true)
+    allow(OpenweatherService).to receive(:get_weather).and_return(data)
     get "/api/v1/forecast?location=denver,co"
 
     expect(response).to be_successful
