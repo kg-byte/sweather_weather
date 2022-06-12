@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe MapquestFacade do 
-  # it 'returns a hash of different type of weathers' do 
   it 'returns a a hash of geocode' do 
   	data = JSON.parse(File.read('spec/fixtures/mapquest_response.json'), symbolize_names: true)
   	
