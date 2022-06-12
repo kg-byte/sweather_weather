@@ -11,6 +11,5 @@ RSpec.describe MapquestService do
   	expect(data[:results][0][:locations][0][:adminArea3]).to eq('CO')
   	expect(data[:results][0][:locations][0]).to have_key(:latLng)
   	expect(data[:results][0][:locations][0][:latLng]).to eq({:lat=>39.738453, :lng=>-104.984853})
-
   end
 end
