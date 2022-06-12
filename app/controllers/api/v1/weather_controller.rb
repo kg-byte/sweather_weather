@@ -4,5 +4,4 @@ class Api::V1::WeatherController < ApplicationController
   	weather_info = OpenweatherFacade.get_weather(geocode)
   	render json: WeatherSerializer.format_weather(weather_info), status: :ok
   end
-
 end

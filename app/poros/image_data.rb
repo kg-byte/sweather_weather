@@ -7,5 +7,4 @@ attr_reader :location, :image_url, :source, :author, :logo
   	@author = data[:photographer]
   	@logo = "https://images.pexels.com/lib/api/pexels.png"
   end
-
 end
