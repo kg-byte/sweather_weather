@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MapquestFacade do 
-  it 'returns a a hash of geocode' do 
+  it 'returns a hash of geocode' do 
   	data = JSON.parse(File.read('spec/fixtures/mapquest_response.json'), symbolize_names: true)
   	
   	allow(MapquestService).to receive(:get_geocode).and_return(data)
