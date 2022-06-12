@@ -13,6 +13,5 @@ RSpec.describe ImagesFacade do
     expect(image.source).to eq("https://www.pexels.com/photo/union-station-building-2706750/")
     expect(image.location).to eq("denver,co")
     expect(image.logo).to eq("https://images.pexels.com/lib/api/pexels.png")
-
   end
 end
