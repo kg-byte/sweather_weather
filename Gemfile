@@ -37,6 +37,8 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 gem 'faraday'
 gem "net-http"
+gem 'rspec_junit_formatter'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
