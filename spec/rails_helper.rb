@@ -71,4 +71,5 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
   config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['mapquest_api_key']}
   config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['openweather_api_key']}
+  config.default_cassette_options = { :record => :new_episodes }
 end
