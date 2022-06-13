@@ -10,7 +10,7 @@ module BooksEdgeCaseHelper
   end
 
   def edge_case_conditions
-    missing_params || empty_params || improper_quantity
+    missing_params_books || empty_params || improper_quantity
   end
 
   def error_messages
