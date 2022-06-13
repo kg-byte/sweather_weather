@@ -79,5 +79,22 @@ RSpec.describe 'User Login', :vcr do
       expect(response.status).to eq(401)
       expect(results[:error]).to eq("Incorrect Credentials. Please try again!")
     end
+
+    it 'invalid email' do
+      params = {
+        "email": 'invalid@email.com',
+        "password": 'password'
+      }
+      headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+      post '/api/v1/sessions', headers: headers, params: JSON.generate(params)
+
+      results = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(response.status).to eq(401)
+      expect(results[:error]).to eq("Incorrect Credentials. Please try again!")
+    end
   end
 end
