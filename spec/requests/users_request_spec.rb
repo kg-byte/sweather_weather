@@ -67,5 +67,22 @@ RSpec.describe 'Weather API', :vcr do
        expect(results[:error]).to eq("Password digest can't be blank and Password can't be blank")
     end
     
+    it 'mismatching password' do
+       params = {
+                      "email": "example@email.com",
+                   "password": "password",
+      "password_confirmation": "password2"
+                 }
+       headers = {
+                   'Content-Type': 'application/json',
+                   'Accept': 'application/json'
+       }
+       post '/api/v1/users',  headers: headers, params: JSON.generate(params)
+
+       expect(response.status).to eq(401)
+       results = JSON.parse(response.body, symbolize_names: true)[:data]
+
+       expect(results[:error]).to eq("Password confirmation doesn't match Password")
+    end
   end
 end
