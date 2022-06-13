@@ -1,4 +1,6 @@
 class Api::V1::BooksController < ApplicationController
+  include ApiKeyAuthenticatable
+  before_action :authenticate_with_api_key!
   def index
     edge_case_response if edge_case_conditions
     if !edge_case_conditions
