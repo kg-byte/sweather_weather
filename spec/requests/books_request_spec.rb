@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Weather API", :vcr do 
+  let!(:user) {User.create(email: 'sample.email.com', password: 'password')}
+  let!(:api_key) {user.api_keys.create(token: 'abc')}
+
   describe 'happy path' do 
     it 'sends serialized current, daily and hourly weather forecast' do 
       data = JSON.parse(File.read('spec/fixtures/openweather_response.json'), symbolize_names: true)
@@ -8,7 +11,7 @@ RSpec.describe "Weather API", :vcr do
       book_data = JSON.parse(File.read('spec/fixtures/openlibrary_response.json'), symbolize_names: true)
       allow(OpenlibraryService).to receive(:get_books).and_return(book_data)
 
-      get "/api/v1/book-search?location=denver,co&quantity=8"
+      get "/api/v1/book-search?location=denver,co&quantity=8", headers: {'Authorization'=> 'Bearer abc'}
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -38,7 +41,7 @@ RSpec.describe "Weather API", :vcr do
 
   describe 'sad paths' do 
     it 'handles edge case with no params' do 
-      get "/api/v1/book-search"
+      get "/api/v1/book-search", headers: {'Authorization'=> 'Bearer abc'}
 
       results = JSON.parse(response.body, symbolize_names: true)[:data]
 
@@ -47,15 +50,15 @@ RSpec.describe "Weather API", :vcr do
     end
 
     it 'handles edge case with empty params' do 
-      get "/api/v1/book-search?location=&quantity=2"
+      get "/api/v1/book-search?location=&quantity=2", headers: {'Authorization'=> 'Bearer abc'}
 
       item_found = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(response.status).to eq(400)
       expect(item_found[:error]).to eq('Location and quantity parameters cannot be empty')
     end
-    
+
     it 'handles edge case with improper quantity' do 
-      get "/api/v1/book-search?location=denver,co&quantity=-2"
+      get "/api/v1/book-search?location=denver,co&quantity=-2", headers: {'Authorization'=> 'Bearer abc'}
 
       item_found = JSON.parse(response.body, symbolize_names: true)[:data]
 
