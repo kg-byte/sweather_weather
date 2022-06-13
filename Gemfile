@@ -48,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'simplecov'
   gem 'simplecov'
+  gem 'shoulda-matchers', '~> 3.1'
   # Some other gems
 end
 

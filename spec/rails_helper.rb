@@ -74,3 +74,10 @@ VCR.configure do |config|
   config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['pexels_api_key'] }
   config.default_cassette_options = { record: :new_episodes }
 end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
