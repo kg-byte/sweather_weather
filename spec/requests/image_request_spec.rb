@@ -26,4 +26,24 @@ RSpec.describe 'Weather API', :vcr do
       expect(image[:attributes][:image][:credit]).to_not have_key(:photographer_id)
     end
   end
+
+  describe 'sad path' do 
+    it 'handles edge case with no params' do
+      get '/api/v1/backgrounds', headers: { 'Authorization' => 'Bearer abc' }
+
+      results = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(response.status).to eq(400)
+      expect(results[:error]).to eq('Location parameter is required')
+    end
+
+    it 'handles edge case with empty params' do
+      get '/api/v1/backgrounds?location=', headers: { 'Authorization' => 'Bearer abc' }
+
+      item_found = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(response.status).to eq(400)
+      expect(item_found[:error]).to eq('Location parameter cannot be empty')
+    end
+
+  end
 end
