@@ -1,8 +1,8 @@
-class SessionsController < ApplicationController
+class Api::V1::SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
-      api_key = user.api_keys.first.token
+      api_key = user.api_keys.first
       render json: UserSerializer.format_user(user, api_key), status: :ok
     else
       error = 'Incorrect Credentials. Please try again!'
