@@ -46,6 +46,7 @@ group :development, :test do
   gem 'figaro'
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov'
   gem 'simplecov'
   # Some other gems

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Weather API', :vcr do
-    let!(:user) { User.create(email: 'sample.email.com', password: 'password') }
-    let!(:api_key) { user.api_keys.create(token: 'abc') }
+  let!(:user) { User.create(email: 'sample.email.com', password: 'password') }
+  let!(:api_key) { user.api_keys.create(token: 'abc') }
 
-  describe 'happy path' do 
+  describe 'happy path' do
     it 'sends serialized current, daily and hourly weather forecast' do
       data = JSON.parse(File.read('spec/fixtures/openweather_response.json'), symbolize_names: true)
       allow(OpenweatherService).to receive(:get_weather).and_return(data)
@@ -54,7 +54,7 @@ RSpec.describe 'Weather API', :vcr do
     end
   end
 
-  describe 'sad paths' do 
+  describe 'sad paths' do
     it 'handles edge case with no params' do
       get '/api/v1/forecast', headers: { 'Authorization' => 'Bearer abc' }
 
@@ -71,6 +71,5 @@ RSpec.describe 'Weather API', :vcr do
       expect(response.status).to eq(400)
       expect(item_found[:error]).to eq('Location parameter cannot be empty')
     end
-
   end
 end

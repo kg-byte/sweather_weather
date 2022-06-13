@@ -11,7 +11,7 @@ module WeatherImagesEdgeCaseHelper
   def error_messages
     {
       missing_params: 'Location parameter is required',
-      empty_params: 'Location parameter cannot be empty',
+      empty_params: 'Location parameter cannot be empty'
     }
   end
 end

@@ -6,6 +6,7 @@ module ParamsHelper
   def missing_params
     !params.has_key?(:location)
   end
+
   def improper_quantity
     params[:quantity].to_i <= 0
   end
