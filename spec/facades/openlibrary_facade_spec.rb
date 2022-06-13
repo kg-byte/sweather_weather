@@ -6,9 +6,11 @@ RSpec.describe OpenlibraryFacade do
   	allow(OpenlibraryService).to receive(:get_books).and_return(book_data)
   	results = OpenlibraryFacade.get_books('denver,co', 5)
 
-  	expect(results).to be_all(Book)
-  	expect(results.count).to eq(5)
-  	results.each do |book|
+  	expect(results).to be_a(Hash)
+  	expect(results[:total_books_found]).to be_a(Integer)
+  	expect(results[:books]).to be_all(Book)
+  	expect(results[:books].count).to eq(5)
+  	results[:books].each do |book|
   		expect(book.isbn).to be_an(Array)
   		expect(book.publisher).to be_an(Array)
   		expect(book.title).to be_a(String)
