@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Weather API', :vcr do
+RSpec.describe 'Users Registration', :vcr do
   let!(:user1) { User.create(email: 'sample.email.com', password: 'password') }
   let!(:api_key) { user1.api_keys.create(token: 'abc') }
 
