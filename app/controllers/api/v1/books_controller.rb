@@ -1,7 +1,7 @@
 class Api::V1::BooksController < ApplicationController
   include ApiKeyAuthenticatable
   include BooksEdgeCaseHelper
-  include BooksParamsHelper
+  include ParamsHelper
   before_action :authenticate_with_api_key!
 
   def index
