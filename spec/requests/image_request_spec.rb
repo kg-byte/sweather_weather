@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Weather API', :vcr do
+RSpec.describe 'Image API', :vcr do
   let!(:user) { User.create(email: 'sample.email.com', password: 'password') }
   let!(:api_key) { user.api_keys.create(token: 'abc') }
 
