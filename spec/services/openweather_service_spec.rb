@@ -13,7 +13,7 @@ RSpec.describe OpenweatherService, :vcr do
 	expect(weather_data[:current][:feels_like]).to be_a(Float)
 	expect(weather_data[:current][:humidity]).to be_an(Integer)
 	expect(weather_data[:current][:visibility]).to be_an(Integer)
-	expect(weather_data[:current][:uvi]).to be_a(Float)
+	expect(weather_data[:current]).to have_key(:uvi)
 	expect(weather_data[:current][:weather]).to be_an(Array)
 	expect(weather_data[:current][:weather][0]).to be_a(Hash)
 	expect(weather_data[:current][:weather][0][:description]).to be_a(String)
