@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CurrentWeather do 
+RSpec.describe HourlyWeather do 
   it 'exists and has attributes' do 
   	params =  {
             "dt": 1654988400,
@@ -26,12 +26,12 @@ RSpec.describe CurrentWeather do
             "pop": 0
         }
 
-    daily_weather = HourlyWeather.new(params)
-    expect(daily_weather).to be_a(HourlyWeather)
-    expect(daily_weather.time).to eq('5:00 PM')
-    expect(daily_weather.temperature).to eq(97.39)
-    expect(daily_weather.conditions).to eq('broken clouds')
-    expect(daily_weather.icon).to eq('04d')
+    hourly_weather = HourlyWeather.new(params)
+    expect(hourly_weather).to be_a(HourlyWeather)
+    expect(hourly_weather.time).to be_a(String)
+    expect(hourly_weather.temperature).to eq(97.39)
+    expect(hourly_weather.conditions).to eq('broken clouds')
+    expect(hourly_weather.icon).to eq('04d')
   end
 
 
