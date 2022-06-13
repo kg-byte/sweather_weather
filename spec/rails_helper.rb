@@ -5,7 +5,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -66,11 +66,11 @@ RSpec.configure do |config|
 end
 
 VCR.configure do |config|
-  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.hook_into :webmock
   config.configure_rspec_metadata!
-  config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['mapquest_api_key']}
-  config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['openweather_api_key']}
-  config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['pexels_api_key']}
-  config.default_cassette_options = { :record => :new_episodes }
+  config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['mapquest_api_key'] }
+  config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['openweather_api_key'] }
+  config.filter_sensitive_data('DONT SHOW MY API KEY') { ENV['pexels_api_key'] }
+  config.default_cassette_options = { record: :new_episodes }
 end
