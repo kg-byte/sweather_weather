@@ -5,10 +5,10 @@ class UserSerializer
         type: 'users',
         id: user.id,
         attributes: {
-             email: user.email,
-           api_key: api_key.token
-          }
+          email: user.email,
+          api_key: api_key.token
         }
       }
+    }
   end
 end

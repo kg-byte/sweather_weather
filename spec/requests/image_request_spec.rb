@@ -4,11 +4,11 @@ RSpec.describe 'Weather API', :vcr do
   let!(:user) { User.create(email: 'sample.email.com', password: 'password') }
   let!(:api_key) { user.api_keys.create(token: 'abc') }
 
-  describe 'happy path' do 
+  describe 'happy path' do
     it 'sends serialized current, daily and hourly weather forecast' do
       data = JSON.parse(File.read('spec/fixtures/images_response.json'), symbolize_names: true)
       allow(ImagesService).to receive(:get_image).and_return(data)
-      get '/api/v1/backgrounds?location=denver,co',  headers: { 'Authorization' => 'Bearer abc' }
+      get '/api/v1/backgrounds?location=denver,co', headers: { 'Authorization' => 'Bearer abc' }
 
       expect(response).to be_successful
       image = JSON.parse(response.body, symbolize_names: true)[:data]
@@ -27,7 +27,7 @@ RSpec.describe 'Weather API', :vcr do
     end
   end
 
-  describe 'sad path' do 
+  describe 'sad path' do
     it 'handles edge case with no params' do
       get '/api/v1/backgrounds', headers: { 'Authorization' => 'Bearer abc' }
 
@@ -44,6 +44,5 @@ RSpec.describe 'Weather API', :vcr do
       expect(response.status).to eq(400)
       expect(item_found[:error]).to eq('Location parameter cannot be empty')
     end
-
   end
 end
