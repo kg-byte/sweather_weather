@@ -11,6 +11,8 @@ RSpec.describe "Weather API", :vcr do
     get "/api/v1/book-search?location=denver,co&quantity=8"
 
     expect(response).to be_successful
+    expect(response.status).to eq(200)
+
     data = JSON.parse(response.body, symbolize_names: true)[:data]
 
     expect(data[:id]).to eq(nil)
