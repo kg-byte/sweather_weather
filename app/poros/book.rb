@@ -5,6 +5,4 @@ attr_reader :isbn, :title, :publisher
   	@title = data[:title]
   	@publisher = data[:publisher]
   end
-
-
 end

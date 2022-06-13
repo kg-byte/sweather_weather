@@ -56,6 +56,5 @@ RSpec.describe Book do
     expect(book.isbn).to eq(["9780762507849", "0762507845"])
     expect(book.title).to eq("Denver, Co")
     expect(book.publisher).to eq(["Universal Map Enterprises"])
-
   end
 end
