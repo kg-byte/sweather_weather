@@ -55,31 +55,15 @@ RSpec.describe "Weather API", :vcr do
       expect(response.status).to eq(400)
       expect(item_found[:error]).to eq('Location and quantity parameters cannot be empty')
     end
-    xit 'handles edge case with no params when finding items' do 
+    it 'handles edge case with improper quantity' do 
 
-      get "/api/v1/items/find_all"
+      get "/api/v1/book-search?location=denver,co&quantity=-2"
+
       item_found = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response.status).to eq(400)
-      expect(item_found[:error]).to eq('Parameter cannot be missing')
+      expect(item_found[:error]).to eq('Quantity parameter must be a positive integer')
     end
 
-    xit 'handles edge case with empty params when finding items' do 
-
-      get "/api/v1/items/find_all?name="
-
-      item_found = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(response.status).to eq(400)
-      expect(item_found[:error]).to eq('Parameter cannot be empty')
-    end
-
-    xit 'handles edge case when max_price is less than min price' do 
-
-      get "/api/v1/items/find?max_price=50&min_price=100"
-
-      item_found = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(response.status).to eq(400)
-      expect(item_found[:error]).to eq('max_price cannot be less than min_price')
-    end
   end
 end
