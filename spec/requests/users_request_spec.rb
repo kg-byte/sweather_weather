@@ -31,6 +31,24 @@ RSpec.describe 'Weather API', :vcr do
   end
 
   describe 'sad path' do 
+    it 'missing email' do
+       params = {
+                      "email": "",
+                   "password": "password",
+      "password_confirmation": "password"
+                 }
+       headers = {
+                   'Content-Type': 'application/json',
+                   'Accept': 'application/json'
+       }
+       post '/api/v1/users',  headers: headers, params: JSON.generate(params)
+
+       expect(response.status).to eq(401)
+       results = JSON.parse(response.body, symbolize_names: true)[:data]
+
+       expect(results[:error]).to eq("Email can't be blank")
+    end
+
 
   end
 end
