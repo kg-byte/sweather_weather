@@ -47,16 +47,14 @@ RSpec.describe "Weather API", :vcr do
     end
 
     it 'handles edge case with empty params' do 
-    
       get "/api/v1/book-search?location=&quantity=2"
-
 
       item_found = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(response.status).to eq(400)
       expect(item_found[:error]).to eq('Location and quantity parameters cannot be empty')
     end
+    
     it 'handles edge case with improper quantity' do 
-
       get "/api/v1/book-search?location=denver,co&quantity=-2"
 
       item_found = JSON.parse(response.body, symbolize_names: true)[:data]
@@ -64,6 +62,5 @@ RSpec.describe "Weather API", :vcr do
       expect(response.status).to eq(400)
       expect(item_found[:error]).to eq('Quantity parameter must be a positive integer')
     end
-
   end
 end
