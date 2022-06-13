@@ -46,13 +46,14 @@ RSpec.describe "Weather API", :vcr do
       expect(results[:error]).to eq('Both location and quantity parameters are required')
     end
 
-    xit 'handles edge case with empty params when finding one merchant' do 
+    it 'handles edge case with empty params' do 
     
-      get "/api/v1/items/find?name="
+      get "/api/v1/book-search?location=&quantity=2"
+
 
       item_found = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(response.status).to eq(400)
-      expect(item_found[:error]).to eq('Parameter cannot be empty')
+      expect(item_found[:error]).to eq('Location and quantity parameters cannot be empty')
     end
     xit 'handles edge case with no params when finding items' do 
 
