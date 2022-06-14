@@ -9,6 +9,7 @@ RSpec.describe Trip do
     expect(trip.start_city).to eq('denver,co')
     expect(trip.end_city).to eq('los angeles,ca')
     expect(trip.travel_time).to eq('40 hours, 16 minutes')
+    expect(trip.eta_in_hours).to eq(40)
     expect(trip.destination_geocode).to eq({:lat=>41.596916, :lng=>-118.244469})
   end
 
