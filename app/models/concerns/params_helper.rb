@@ -18,4 +18,8 @@ module ParamsHelper
   def missing_params_trips
     !params.has_key?(:origin) || !params.has_key?(:destination)
   end
+
+  def trip_params
+    params.permit(:origin, :destination, :api_key)
+  end
 end

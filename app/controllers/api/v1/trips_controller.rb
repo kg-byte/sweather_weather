@@ -13,11 +13,6 @@ class Api::V1::TripsController < ApplicationController
   end
 
   private
-
-  def trip_params
-    params.permit(:origin, :destination, :api_key)
-  end
-
   def trip
     MapquestFacade.get_route(trip_params[:origin], trip_params[:destination])
   end
