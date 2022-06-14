@@ -17,6 +17,6 @@ attr_reader :start_city, :end_city, :travel_time, :destination_geocode, :eta_in_
   def time_in_hours(time)
   	hour_min = time.split(":")[0..-2]
   	return hour_min.first.to_i if hour_min.last.to_i < 30
-  	return hour_min.first.to_i+=1 if hour_min.last.to_i >= 30
+  	return hour_min.first.to_i+1 if hour_min.last.to_i >= 30
   end
 end
