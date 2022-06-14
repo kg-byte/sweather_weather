@@ -2,6 +2,7 @@ class Api::V1::WeatherController < ApplicationController
   include ApiKeyAuthenticatable
   include WeatherImagesEdgeCaseHelper
   include ParamsHelper
+  before_action :authenticate_with_api_key!
 
   def index
     edge_case_response if edge_case_conditions
