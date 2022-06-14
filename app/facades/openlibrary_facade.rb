@@ -1,7 +1,20 @@
 class OpenlibraryFacade
-  def self.get_books(location, num)
-    book_data = OpenlibraryService.get_books(location)
-    books = book_data[:docs][0..num.to_i - 1].map { |data| Book.new(data) }
-    { total_books_found: book_data[:numFound], books: books }
+  class << self
+    def get_books(location, num)
+      { total_books_found: num_found(location), books: books(location, num) }
+    end
+
+    private
+    def book_data(location)
+      OpenlibraryService.get_books(location)
+    end
+
+    def books(location, num)
+      book_data(location)[:docs][0..num.to_i - 1].map { |data| Book.new(data) }
+    end
+
+    def num_found(location)
+      book_data(location)[:numFound]
+    end
   end
 end
