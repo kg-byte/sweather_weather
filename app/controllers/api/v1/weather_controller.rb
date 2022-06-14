@@ -10,6 +10,7 @@ class Api::V1::WeatherController < ApplicationController
   end
 
   private
+
   def geocode
     MapquestFacade.get_geocode(params[:location])
   end

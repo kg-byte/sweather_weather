@@ -10,6 +10,7 @@ class Api::V1::BooksController < ApplicationController
   end
 
   private
+
   def book_data_with_weather
     render json: BooksSerializer.format_books(current_weather, book_data, params[:location]), status: :ok
   end

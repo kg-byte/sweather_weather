@@ -13,6 +13,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   private
+
   def trip
     MapquestFacade.get_route(trip_params[:origin], trip_params[:destination])
   end
@@ -26,6 +27,6 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def serialize_impossible_route(trip)
-    render json: TripSerializer.format_trip(trip), status: :ok 
+    render json: TripSerializer.format_trip(trip), status: :ok
   end
 end
