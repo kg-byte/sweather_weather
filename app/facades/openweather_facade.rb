@@ -6,4 +6,9 @@ class OpenweatherFacade
     hourly_weather = weather_data[:hourly][1..8].map { |data| HourlyWeather.new(data) }
     { current_weather: current_weather, daily_weather: daily_weather, hourly_weather: hourly_weather }
   end
+
+  def self.get_weather_at_eta(geocode, hours)
+    weather_data = OpenweatherService.get_weather(geocode[:lat], geocode[:lng])
+    HourlyWeather.new(weather_data[:hourly][hours])
+  end
 end
