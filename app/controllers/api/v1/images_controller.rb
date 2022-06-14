@@ -6,9 +6,16 @@ class Api::V1::ImagesController < ApplicationController
 
   def index
     edge_case_response if edge_case_conditions
-    unless edge_case_conditions
-      image_data = ImagesFacade.get_image(params[:location])
-      render json: ImageSerializer.format_image(image_data), status: :ok
-    end
+    serialize_image unless edge_case_conditions
+  end
+
+  private
+
+  def image_data
+    ImagesFacade.get_image(params[:location])
+  end
+
+  def serialize_image
+    render json: ImageSerializer.format_image(image_data), status: :ok
   end
 end

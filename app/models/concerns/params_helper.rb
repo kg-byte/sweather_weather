@@ -18,4 +18,18 @@ module ParamsHelper
   def missing_params_trips
     !params.has_key?(:origin) || !params.has_key?(:destination)
   end
+
+  def trip_params
+    params.permit(:origin, :destination, :api_key)
+  end
+
+  def user_params
+    params.permit(:email, :password, :password_confirmation)
+  end
+
+  def downcase_email_params
+    params = user_params
+    params[:email] = user_params[:email].downcase
+    params
+  end
 end
