@@ -6,15 +6,7 @@ class Api::V1::TripsController < ApplicationController
 
   def index
     edge_case_response if edge_case_conditions
-    unless edge_case_conditions
-      trip = MapquestFacade.get_route(trip_params[:origin], trip_params[:destination])
-      if trip.instance_of?(Trip)
-        eta_weather = OpenweatherFacade.get_weather_at_eta(trip.destination_geocode, trip.eta_in_hours)
-        render json: TripSerializer.format_trip(trip, eta_weather), status: :ok
-      elsif trip.instance_of?(ImpossibleRoute)
-        render json: TripSerializer.format_trip(trip), status: :ok
-      end
-    end
+    serialize_trip unless edge_case_conditions
   end
 
   private
@@ -22,4 +14,16 @@ class Api::V1::TripsController < ApplicationController
   def trip_params
     params.permit(:origin, :destination, :api_key)
   end
+
+  def serialize_trip
+    trip = MapquestFacade.get_route(trip_params[:origin], trip_params[:destination])
+    serialize_valid_trip(trip) if trip.instance_of?(Trip)
+    render json: TripSerializer.format_trip(trip), status: :ok if trip.instance_of?(ImpossibleRoute)
+  end
+
+  def serialize_valid_trip(trip)
+    eta_weather = OpenweatherFacade.get_weather_at_eta(trip.destination_geocode, trip.eta_in_hours)
+    render json: TripSerializer.format_trip(trip, eta_weather), status: :ok
+  end
+
 end
