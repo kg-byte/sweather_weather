@@ -13,7 +13,7 @@ RSpec.describe MapquestService do
     expect(data[:results][0][:locations][0][:latLng]).to eq({ lat: 39.738453, lng: -104.984853 })
   end
 
-  it 'returns route data', :vcr do
+  it 'returns route data if valid route', :vcr do
     json = {locations: ['denver,co', 'los angeles,ca']}.to_json
     data = MapquestService.get_route(json)
 
@@ -26,5 +26,14 @@ RSpec.describe MapquestService do
     expect(data[:route][:formattedTime]).to be_a(String)
   end
 
+  it 'returns impossible route data if invalid route', :vcr do
+    json = {locations: ['denver,co', 'london,uk']}.to_json
+    data = MapquestService.get_route(json)
+
+    expect(data).to be_a(Hash)
+    expect(data[:route]).to be_a(Hash)
+    expect(data[:route][:routeError][:errorCode]).to eq(2)
+    expect(data[:info][:messages]).to eq(["We are unable to route with the given locations."])
+  end
 
 end
