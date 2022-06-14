@@ -12,6 +12,10 @@ module ParamsHelper
   end
 
   def empty_params
-    params.values.include?('')
+    params.values.include?('') || params.values.include?(nil)
+  end
+
+  def missing_params_trips
+    !params.has_key?(:origin) || !params.has_key?(:destination)
   end
 end

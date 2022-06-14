@@ -85,6 +85,40 @@ RSpec.describe 'Roadtrip API', :vcr do
       results = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(results[:error]).to eq('Invalid API token!') 
     end
- 
+    it 'handles edge case with no params' do
+      params = {
+            "api_key": "abc"
+          }
+         
+         headers = {
+           'Content-Type': 'application/json',
+           'Accept': 'application/json'
+         }
+
+      post '/api/v1/road_trip', headers: headers, params: JSON.generate(params)
+      results = JSON.parse(response.body, symbolize_names: true)[:data]
+      
+      expect(response.status).to eq(400)
+      expect(results[:error]).to eq('Both origin and destination parameters are required')
+    end
+
+    it 'handles edge case with empty params' do
+      params = {
+              "origin": "",
+              "destination": "",
+              "api_key": "abc"
+            }
+           
+           headers = {
+             'Content-Type': 'application/json',
+             'Accept': 'application/json'
+           }
+
+        post '/api/v1/road_trip', headers: headers, params: JSON.generate(params)
+        results = JSON.parse(response.body, symbolize_names: true)[:data]
+        
+        expect(response.status).to eq(400)
+        expect(results[:error]).to eq('Origin and destination parameters cannot be empty')
+    end
   end
 end
