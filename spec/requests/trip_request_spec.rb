@@ -67,6 +67,24 @@ RSpec.describe 'Roadtrip API', :vcr do
   end
 
   describe 'sad path' do
-  
+    it 'handles sad path invalid api token' do 
+      params = {
+         "origin": "Denver,CO",
+         "destination": "Los Angeles,CA",
+         "api_key": "abd"
+       }
+      
+      headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+
+      post '/api/v1/road_trip', headers: headers, params: JSON.generate(params)
+
+      expect(response.status).to eq(401)
+      results = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(results[:error]).to eq('Invalid API token!') 
+    end
+ 
   end
 end
