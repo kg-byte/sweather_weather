@@ -6,7 +6,7 @@ RSpec.describe ImagesService do
 
     expect(data).to be_a(Hash)
     expect(data[:page]).to eq(1)
-    expect(data[:total_results]).to eq(72)
+    expect(data[:total_results]).to be_an(Integer)
     expect(data[:photos]).to be_an(Array)
     data[:photos].each do |photo|
       expect(photo[:id]).to be_an(Integer)

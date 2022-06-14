@@ -5,7 +5,6 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   private
-
   def authenticated
     user && user.authenticate(params[:password])
   end

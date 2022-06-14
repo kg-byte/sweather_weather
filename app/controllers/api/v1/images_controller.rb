@@ -10,7 +10,6 @@ class Api::V1::ImagesController < ApplicationController
   end
 
   private
-
   def image_data
     ImagesFacade.get_image(params[:location])
   end
