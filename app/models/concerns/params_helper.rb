@@ -26,4 +26,10 @@ module ParamsHelper
   def user_params
     params.permit(:email, :password, :password_confirmation)
   end
+
+  def downcase_email_params
+    params = user_params
+    params[:email] = user_params[:email].downcase
+    params
+  end
 end
