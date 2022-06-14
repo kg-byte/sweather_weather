@@ -6,14 +6,10 @@ class Api::V1::TripsController < ApplicationController
 
   def index
     edge_case_response if edge_case_conditions
-    unless edge_case_conditions
-      serialize_valid_trip(trip) if trip.instance_of?(Trip)
-      serialize_impossible_route(trip) if trip.instance_of?(ImpossibleRoute)
-    end
+    serialize_response unless edge_case_conditions
   end
 
   private
-
   def trip
     MapquestFacade.get_route(trip_params[:origin], trip_params[:destination])
   end
@@ -28,5 +24,10 @@ class Api::V1::TripsController < ApplicationController
 
   def serialize_impossible_route(trip)
     render json: TripSerializer.format_trip(trip), status: :ok
+  end
+
+  def serialize_response
+    serialize_valid_trip(trip) if trip.instance_of?(Trip)
+    serialize_impossible_route(trip) if trip.instance_of?(ImpossibleRoute)
   end
 end
