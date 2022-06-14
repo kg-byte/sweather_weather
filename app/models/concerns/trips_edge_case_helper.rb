@@ -1,6 +1,9 @@
 module TripsEdgeCaseHelper
   def edge_case_response
-    return render json: ErrorSerializer.format_error(error_messages[:missing_params]), status: 400 if missing_params_trips
+    if missing_params_trips
+      return render json: ErrorSerializer.format_error(error_messages[:missing_params]),
+                    status: 400
+    end
     return render json: ErrorSerializer.format_error(error_messages[:empty_params]), status: 400 if empty_params
   end
 

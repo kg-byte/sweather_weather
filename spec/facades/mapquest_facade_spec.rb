@@ -21,7 +21,7 @@ RSpec.describe MapquestFacade do
     expect(trip.start_city).to eq('denver,co')
     expect(trip.end_city).to eq('los angeles,ca')
     expect(trip.travel_time).to eq('40 hours, 16 minutes')
-    expect(trip.destination_geocode).to eq({:lat=>41.596916, :lng=>-118.244469})  
+    expect(trip.destination_geocode).to eq({ lat: 41.596916, lng: -118.244469 })
   end
 
   it 'returns impossibleroute poro if invalid route' do
