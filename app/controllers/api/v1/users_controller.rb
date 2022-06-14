@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  include ParamsHelper
   def create
     params = user_params
     params[:email] = user_params[:email].downcase
@@ -14,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.permit(:email, :password, :password_confirmation)
-  end
+
+
+
 end

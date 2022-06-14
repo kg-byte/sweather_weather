@@ -22,4 +22,8 @@ module ParamsHelper
   def trip_params
     params.permit(:origin, :destination, :api_key)
   end
+
+  def user_params
+    params.permit(:email, :password, :password_confirmation)
+  end
 end
