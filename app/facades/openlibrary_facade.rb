@@ -6,7 +6,7 @@ class OpenlibraryFacade
 
     private
     def book_data(location)
-      OpenlibraryService.get_books(location)
+      data ||= OpenlibraryService.get_books(location)
     end
 
     def books(location, num)
