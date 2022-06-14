@@ -43,7 +43,7 @@ RSpec.describe 'User Login', :vcr do
       results = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response.status).to eq(401)
-      expect(results[:error]).to eq("Incorrect Credentials. Please try again!")
+      expect(results[:error]).to eq('Incorrect Credentials. Please try again!')
     end
 
     it 'missing password' do
@@ -60,7 +60,7 @@ RSpec.describe 'User Login', :vcr do
       results = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response.status).to eq(401)
-      expect(results[:error]).to eq("Incorrect Credentials. Please try again!")
+      expect(results[:error]).to eq('Incorrect Credentials. Please try again!')
     end
 
     it 'wrong password' do
@@ -77,7 +77,7 @@ RSpec.describe 'User Login', :vcr do
       results = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response.status).to eq(401)
-      expect(results[:error]).to eq("Incorrect Credentials. Please try again!")
+      expect(results[:error]).to eq('Incorrect Credentials. Please try again!')
     end
 
     it 'invalid email' do
@@ -94,7 +94,7 @@ RSpec.describe 'User Login', :vcr do
       results = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response.status).to eq(401)
-      expect(results[:error]).to eq("Incorrect Credentials. Please try again!")
+      expect(results[:error]).to eq('Incorrect Credentials. Please try again!')
     end
   end
 end
