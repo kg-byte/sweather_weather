@@ -5,6 +5,7 @@ class ImagesFacade
     end
 
     private
+
     def city(location)
       location.split(',').first
     end

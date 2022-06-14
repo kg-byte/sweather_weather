@@ -11,6 +11,7 @@ class MapquestFacade
     end
 
     private
+
     def json_params(origin, destination)
       { locations: [origin, destination] }.to_json
     end

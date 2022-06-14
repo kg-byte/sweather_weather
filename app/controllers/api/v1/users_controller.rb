@@ -12,6 +12,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
   def serialize_user(user, api_key)
     render json: UserSerializer.format_user(user, api_key), status: :created
   end

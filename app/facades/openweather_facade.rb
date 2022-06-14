@@ -1,7 +1,8 @@
 class OpenweatherFacade
   class << self
     def get_weather(geocode)
-      { current_weather: current_weather(geocode), daily_weather: daily_weather(geocode), hourly_weather: hourly_weather(geocode) }
+      { current_weather: current_weather(geocode), daily_weather: daily_weather(geocode),
+        hourly_weather: hourly_weather(geocode) }
     end
 
     def get_weather_at_eta(geocode, hours)
