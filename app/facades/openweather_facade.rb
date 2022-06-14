@@ -1,14 +1,29 @@
 class OpenweatherFacade
-  def self.get_weather(geocode)
-    weather_data = OpenweatherService.get_weather(geocode[:lat], geocode[:lng])
-    current_weather = CurrentWeather.new(weather_data[:current])
-    daily_weather = weather_data[:daily][1..5].map { |data| DailyWeather.new(data) }
-    hourly_weather = weather_data[:hourly][1..8].map { |data| HourlyWeather.new(data) }
-    { current_weather: current_weather, daily_weather: daily_weather, hourly_weather: hourly_weather }
-  end
+  class << self
+    def get_weather(geocode)
+      { current_weather: current_weather(geocode), daily_weather: daily_weather(geocode), hourly_weather: hourly_weather(geocode) }
+    end
 
-  def self.get_weather_at_eta(geocode, hours)
-    weather_data = OpenweatherService.get_weather(geocode[:lat], geocode[:lng])
-    HourlyWeather.new(weather_data[:hourly][hours])
+    def get_weather_at_eta(geocode, hours)
+      HourlyWeather.new(weather_data(geocode)[:hourly][hours])
+    end
+
+    private
+
+    def weather_data(geocode)
+      data ||= OpenweatherService.get_weather(geocode[:lat], geocode[:lng])
+    end
+
+    def current_weather(geocode)
+      CurrentWeather.new(weather_data(geocode)[:current])
+    end
+
+    def daily_weather(geocode)
+      weather_data(geocode)[:daily][1..5].map { |data| DailyWeather.new(data) }
+    end
+
+    def hourly_weather(geocode)
+      weather_data(geocode)[:hourly][1..8].map { |data| HourlyWeather.new(data) }
+    end
   end
 end
