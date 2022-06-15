@@ -17,7 +17,7 @@
 
 ## App
 
-Sweater Weather app can be found on [heroku](https://secure-headland-69259.herokuapp.com).
+Sweater Weather app can be found on [heroku](https://secure-headland-69259.herokuapp.com/api/v1/forecast?location=denver,co).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
